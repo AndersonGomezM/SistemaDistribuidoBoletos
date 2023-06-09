@@ -3,6 +3,7 @@ from rest_framework import routers
 from ApiBoletos import views
 
 router = routers.DefaultRouter()
+router.register(r'eventos', views.EventosViewSet)
 router.register(r'boletos', views.BoletosViewSet)
 
 urlpatterns = [

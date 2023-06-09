@@ -2,6 +2,22 @@ virtualenv: Api
 
 Paquetes: https://youtu.be/Xts8NmyAc8c
 
-Usarname: Boletos
-
+Usarname:   admin
+Email:      yotap38478@pihey.com
 Contraseña: Pihey159-
+
+https://www.google.com/search?q=django+database+conection&oq=django+database+conection&aqs=chrome..69i57.6575j0j1&sourceid=chrome&ie=UTF-8
+
+https://www.google.com/search?q=django+sqlserver&biw=1366&bih=657&ei=gYuCZKvNGLySwt0PxqG2kAw&ved=0ahUKEwjrkb2pj7X_AhU8ibAFHcaQDcIQ4dUDCA8&uact=5&oq=django+sqlserver&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIICAAQBxAeEBMyCAgAEAcQHhATMggIABAHEB4QEzIICAAQBxAeEBMyCAgAEAcQHhATMggIABAHEB4QEzIICAAQBxAeEBMyCggAEAcQHhATEAoyCAgAEAcQHhATMggIABAHEB4QEzoECAAQR0oECEEYAFDbB1jbB2D4CWgAcAJ4AIABwAGIAcABkgEDMC4xmAEAoAEBwAEByAEI&sclient=gws-wiz-serp
+
+https://youtu.be/O5YkEFLXcRg
+
+https://github.com/Daniel8529/NOVAASSIST/blob/main/MainWindow.xaml
+
+https://github.com/AndersonGomezM/SistemaDistribuidoBoletos.git
+
+https://kotlinlang.org/docs/whatsnew1820.html?utm_source=ide&utm_medium=release-notification&utm_campaign=1-8-20-release
+
+https://www.youtube.com/watch?v=TJn2cGWGnHU
+
+https://www.youtube.com/watch?v=hL52_nB5QSw
