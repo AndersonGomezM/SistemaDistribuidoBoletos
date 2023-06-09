@@ -1,3 +1,7 @@
+virtualenv: Api
+
+Paquetes: https://youtu.be/Xts8NmyAc8c
+
 Usarname: Boletos
 
 Contraseña: Pihey159-
