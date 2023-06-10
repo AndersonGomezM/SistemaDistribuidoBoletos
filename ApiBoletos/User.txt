@@ -21,3 +21,9 @@ https://kotlinlang.org/docs/whatsnew1820.html?utm_source=ide&utm_medium=release-
 https://www.youtube.com/watch?v=TJn2cGWGnHU
 
 https://www.youtube.com/watch?v=hL52_nB5QSw
+
+https://www.youtube.com/watch?v=XIw97Wab3no&themeRefresh=1
+
+Para consumir en C#
+https://www.google.com/search?q=http+client+c%23+wpf&rlz=1C1ALOY_esDO1041DO1041&ei=TnqEZPSgPJTgxgG_-pz4CA&ved=0ahUKEwj0_56a57j_AhUUsDEKHT89B48Q4dUDCA8&uact=5&oq=http+client+c%23+wpf&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABOgQIABBHOgcIABCKBRBDOgUIABCABDoGCAAQFhAeOggIABAWEB4QCkoECEEYAEoFCEASATFQzANY2xpgph9oAHACeACAAYcBiAHYBJIBAzAuNZgBAKABAcABAcgBCA&sclient=gws-wiz-serp
+
