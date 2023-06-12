@@ -8,9 +8,13 @@ using DesktopBoletos.Models;
 
 namespace DesktopBoletos.DAL
 {
-    public class contexto : DbContext
+    public class Contexto : DbContext
     {
         public DbSet<User>? User { get; set; }
+
+        public DbSet<Eventos>? Eventos { get; set; }
+
+        public DbSet<Boletas>? Boletas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
