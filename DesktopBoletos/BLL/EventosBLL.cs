@@ -160,22 +160,15 @@ namespace DesktopBoletos.BLL
             return lista;
         }
 
-        public List<Eventos> GetList(Expression<Func<Eventos, bool>> criterio)
+        public List<Eventos> GetList()
         {
             List<Eventos> lista = new List<Eventos>();
-            Contexto contexto = new Contexto();
 
             try {
-                lista = contexto.Eventos!
-                    .Where(criterio)
-                    .AsNoTracking()
-                    .ToList();
+                lista = Geteventos();
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return lista;

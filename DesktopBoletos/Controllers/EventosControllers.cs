@@ -15,19 +15,24 @@ namespace DesktopBoletos.Controllers
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
-        public async Task GetEvento()
+        HttpClient httpClient = new HttpClient();
+        List<Eventos> eventos = new List<Eventos>();
+
+        private async Task ConectionEvento()
         {
-            using(var httpClient = new HttpClient())
+            var response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                var response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStreamAsync();
-                    var eventos = System.Text.Json.JsonSerializer.Deserialize<List<Eventos>>(content, options);
-                }
-                else
-                    Console.WriteLine("Error");
+                var content = await response.Content.ReadAsStreamAsync();
+                eventos = JsonSerializer.Deserialize<List<Eventos>>(content, options);
             }
+            else
+                Console.WriteLine("Error");
+        }
+
+        public List<Eventos> GETEventos()
+        {
+            return eventos;
         }
     }
 }
