@@ -6,12 +6,13 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local="clr-namespace:DesktopBoletos"
     mc:Ignorable="d"
-    Title="Menu Boletas" Height="450" Width="600" Icon="\Img\Icono.png"
+    Title="Login" Height="400" Width="600" Icon="\Img\Icono.png"
+    ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
     Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}" >
-    
+
     <Grid HorizontalAlignment="Center" Background="{StaticResource MaterialDesignPaper}" >
         <Border CornerRadius="20" Margin="20" >
-            <StackPanel Margin="20">
+            <StackPanel>
 
                 <Label Content="Login" FontSize="30" HorizontalAlignment="Center"
                     materialDesign:ShadowAssist.ShadowDepth="Depth4"
@@ -30,17 +31,17 @@
                 />
                 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                    <Button x:Name="LoginButton" Content="Login" Height="35" Click="LoginButton_Click" Width="100" Margin="10,15"
+                    <Button x:Name="LoginButton" Content="Login" Height="35" Width="100" Margin="10,15"
+                        Click="LoginButton_Click"
                         Style="{StaticResource MaterialDesignPaperButton}"
                         ToolTip="Resource name: MaterialDesignPaperLightButton"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     />
 
-                    <Button x:Name="CancelButton" Content="Cancelar" Height="35" Click="CancelButton_Click" Width="100" Margin="10,15"
+                    <Button x:Name="CancelButton" Content="Cancelar" Height="35" Width="100" Margin="10,15"
+                        Click="CancelButton_Click"
                         Style="{StaticResource MaterialDesignPaperButton}"
                         ToolTip="Resource name: MaterialDesignPaperLightButton"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                     />
                 </StackPanel>

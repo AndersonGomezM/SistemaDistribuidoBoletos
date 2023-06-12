@@ -1,0 +1,40 @@
+<Window x:Class="DesktopBoletos.UI.Registros.ConsultaEvento"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:DesktopBoletos.UI.Registros"
+        mc:Ignorable="d"
+        Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}" >
+
+    <StackPanel>
+        <Menu>
+            <Button Click="Back_Click" Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="MaterialDesignIconForegroundButton" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <Button.Background>
+                    <ImageBrush ImageSource="\Img\BackIcon.ico"/>
+                </Button.Background>
+            </Button>
+        </Menu>
+
+        <DataGrid x:Name="EventosData" Margin="10,0" IsReadOnly="true"
+            ItemsSource="{Binding Path=Eventos}"
+            SelectedItem="{Binding Path=SelectedEmpleados, Mode=TwoWay}"
+        >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate> 
+                        <DataTemplate> 
+                            <Button  x:Name="VerDatos" Content="👁" Click="Ver_Click"
+                                Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                                ToolTip="MaterialDesignOutlinedButton"
+                            />
+                        </DataTemplate> 
+                    </DataGridTemplateColumn.CellTemplate> 
+               </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>

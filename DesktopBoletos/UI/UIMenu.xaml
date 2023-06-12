@@ -1,0 +1,28 @@
+<Window x:Class="DesktopBoletos.UI.UIMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:DesktopBoletos.UI"
+        mc:Ignorable="d"
+        Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}" >
+
+    <StackPanel>
+        <Menu materialDesign:ShadowAssist.ShadowDepth="Depth2" >
+            <MenuItem Header="Registros">
+                <MenuItem Header="Registro de Eventos" Click="RegistroEventos_Click" />
+            </MenuItem>
+
+            <MenuItem Header="Consultas">
+                <MenuItem Header="Consulta de Eventos" Click="ConsultaEventos_Click" />
+            </MenuItem>
+
+        </Menu>
+        <StackPanel HorizontalAlignment="Center" >
+            <Image Height="300" Width="400" Source="/Img/Ticket.png" Opacity="0.75" Stretch="Uniform" />
+        </StackPanel>
+    </StackPanel>
+</Window>
