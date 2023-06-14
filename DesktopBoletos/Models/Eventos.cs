@@ -19,6 +19,8 @@ namespace DesktopBoletos.Models
 
         public DateTime Fecha { get; set; } = DateTime.Now;
 
+        public string? Direccion { get; set; }
+
         /*[ForeignKey("Id")]
         public virtual List<Boletas> Productos { get; set; } = new List<Boletas>();*/
     }

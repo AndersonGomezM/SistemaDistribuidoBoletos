@@ -12,8 +12,6 @@ namespace DesktopBoletos.DAL
     {
         public DbSet<User>? User { get; set; }
 
-        public DbSet<Eventos>? Eventos { get; set; }
-
         public DbSet<Boletas>? Boletas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,8 +21,8 @@ namespace DesktopBoletos.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Categoria>().HasData(
-                new Categoria { CategoriaId = 1, NombreCategoria = "Percianas aluminicas" },
+            /*modelBuilder.Entity<Boletas>().HasData(
+                new Boletas { Id = 1, Nombre = "Boletas" },
             );*/
         }
     }
