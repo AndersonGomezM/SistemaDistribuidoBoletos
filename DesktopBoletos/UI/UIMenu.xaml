@@ -21,6 +21,9 @@
             </MenuItem>
 
         </Menu>
+        
+        <Separator />
+
         <StackPanel HorizontalAlignment="Center" >
             <Image Height="300" Width="400" Source="/Img/Ticket.png" Opacity="0.75" Stretch="Uniform" />
         </StackPanel>

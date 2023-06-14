@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DesktopBoletos.BLL;
+using DesktopBoletos.Models;
 using DesktopBoletos.UI;
 
 namespace DesktopBoletos
@@ -29,9 +30,17 @@ namespace DesktopBoletos
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            UIMenu menu = new UIMenu();
-            menu.Show();
-            this.Close();
+            User user = new User();
+            UserBLL userBLL = new UserBLL();
+            user.Username = Username.Text.ToString();
+            user.Password = Password.Password.ToString();
+            
+            if(userBLL.Buscar(user))
+            {
+                UIMenu menu = new UIMenu();
+                menu.Show();
+                this.Close();
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

@@ -13,28 +13,26 @@ namespace DesktopBoletos.BLL
 {
     public class EventosBLL
     {
+        EventosControllers controllers = new EventosControllers();
+
         public bool Guardar(Eventos eventos)
         {
-            if(!Existe(eventos.Id))
-                return Insertar(eventos);
-            else
-                return Modificar(eventos);
+            controllers.POSTEvento(eventos);
+            return true;
         }
 
         private bool Modificar(Eventos eventos)
         {
-            Contexto contexto = new Contexto();
             bool confirmar = false;
 
             try {
+                /*
                 contexto.Entry(eventos).State = EntityState.Modified;
                 confirmar = contexto.SaveChanges() > 0;
+                */
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return confirmar;
@@ -42,18 +40,16 @@ namespace DesktopBoletos.BLL
 
         private bool Insertar(Eventos eventos)
         {
-            Contexto contexto = new Contexto();
             bool confirmar = false;
 
             try {
+                /*
                 contexto.Eventos!.Add(eventos);
                 confirmar = contexto.SaveChanges() > 0;
+                */
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return confirmar;
@@ -61,10 +57,10 @@ namespace DesktopBoletos.BLL
 
         public bool Eliminar(int id)
         {
-            Contexto contexto = new Contexto();
             bool confirmar = false;
 
             try {
+                /*
                 var eventos = contexto.Eventos!.Find(id);
                 
                 if(eventos != null)
@@ -72,12 +68,10 @@ namespace DesktopBoletos.BLL
                     contexto.Eventos!.Remove(eventos);
                     confirmar = contexto.SaveChanges() > 0;
                 }
+                */
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return confirmar;
@@ -85,38 +79,32 @@ namespace DesktopBoletos.BLL
 
         public Eventos Buscar(int id)
         {
-            Contexto contexto = new Contexto();
-            Eventos? eventos;
+            Eventos? eventos = new Eventos();
 
             try {
+                /*
                 eventos = contexto.Eventos!
                     .Where(e => e.Id == id)
                     .AsNoTracking()
                     .SingleOrDefault();
+                */
             }
             catch (Exception) {
                 throw;
             }
-            finally {
-                contexto.Dispose();
-            }
 
-            return eventos!;
+            return eventos;
         }
 
         private bool Existe(int id)
         {
-            Contexto contexto = new Contexto();
             bool confirmar = false;
 
             try {
-                confirmar = contexto.Eventos!.Any(e => e.Id == id);
+                //confirmar = contexto.Eventos!.Any(e => e.Id == id);
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return confirmar;
@@ -124,17 +112,13 @@ namespace DesktopBoletos.BLL
 
         public bool Validar(string? nombre)
         {
-            Contexto contexto = new Contexto();
             bool confirmar = false;
 
             try {
-                confirmar = contexto.Eventos!.Any(e => e.Nombre!.ToLower() == nombre!.ToLower());
+                //confirmar = contexto.Eventos!.Any(e => e.Nombre!.ToLower() == nombre!.ToLower());
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return confirmar;
@@ -143,18 +127,12 @@ namespace DesktopBoletos.BLL
         public List<Eventos> Geteventos()
         {
             List<Eventos> lista = new List<Eventos>();
-            Contexto contexto = new Contexto();
 
             try {
-                lista = contexto.Eventos!
-                    .AsNoTracking()
-                    .ToList();
+
             }
             catch (Exception) {
                 throw;
-            }
-            finally {
-                contexto.Dispose();
             }
 
             return lista;
@@ -165,7 +143,7 @@ namespace DesktopBoletos.BLL
             List<Eventos> lista = new List<Eventos>();
 
             try {
-                lista = Geteventos();
+                //lista = controllers.GETEventos();
             }
             catch (Exception) {
                 throw;

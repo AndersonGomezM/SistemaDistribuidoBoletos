@@ -12,29 +12,43 @@
 
     <StackPanel>
         <Menu>
-            <Button Click="Back_Click" Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="MaterialDesignIconForegroundButton" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+            <Button Click="Back_Click"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="MaterialDesignIconForegroundButton"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                 <Button.Background>
                     <ImageBrush ImageSource="\Img\BackIcon.ico"/>
                 </Button.Background>
             </Button>
         </Menu>
 
-        <DataGrid x:Name="EventosData" Margin="10,0" IsReadOnly="true"
-            ItemsSource="{Binding Path=Eventos}"
-            SelectedItem="{Binding Path=SelectedEmpleados, Mode=TwoWay}"
-        >
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate> 
-                        <DataTemplate> 
-                            <Button  x:Name="VerDatos" Content="👁" Click="Ver_Click"
-                                Style="{StaticResource MaterialDesignOutlinedLightButton}"
-                                ToolTip="MaterialDesignOutlinedButton"
-                            />
-                        </DataTemplate> 
-                    </DataGridTemplateColumn.CellTemplate> 
-               </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <materialDesign:Card Margin="10,20" materialDesign:ShadowAssist.ShadowDepth="Depth3" >
+            <DataGrid x:Name="EventosData" IsReadOnly="true"
+                ItemsSource="{Binding Path=Eventos}"
+                SelectedItem="{Binding Path=SelectedEmpleados, Mode=TwoWay}"
+            >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate> 
+                            <DataTemplate> 
+                                <Button  x:Name="VerDatos" Content="👁" Click="Ver_Click"
+                                    Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                                    ToolTip="MaterialDesignOutlinedButton"
+                                />
+                            </DataTemplate> 
+                        </DataGridTemplateColumn.CellTemplate> 
+                </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <Button x:Name="ChangeButton" Width="70" Height="70"
+            Style="{StaticResource MaterialDesignFloatingActionButton}"
+            Content="{materialDesign:PackIcon DotsHorizontal}"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+        />
     </StackPanel>
 </Window>

@@ -29,7 +29,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
 
-                <TextBox x:Name="IdTextBox" Text="{Binding EmpleadoId}" Width="80" Height="50"
+                <TextBox x:Name="IdTextBox" Text="{Binding Id}" Width="80" Height="50"
                     FontSize="16" IsReadOnly="true"
                     materialDesign:HintAssist.Hint="Id"
                     Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -40,6 +40,15 @@
                     Click="ConsultarButton_Click"
                     Style="{StaticResource MaterialDesignOutlinedLightButton}"
                     ToolTip="MaterialDesignOutlinedButton"
+                />
+
+                <Button x:Name="ChangeButton" Margin="10,0" Width="40" Height="40"  Visibility="Collapsed"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    Content="{materialDesign:PackIcon DotsHorizontal}"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 />
             </StackPanel>
 
@@ -53,9 +62,9 @@
                 />
             </StackPanel>
 
-            <StackPanel HorizontalAlignment="Center" Margin="0,5">
+            <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Width="800" Height="100"
-                    FontSize="16" MinWidth="700" VerticalScrollBarVisibility="Auto"
+                    FontSize="16" VerticalScrollBarVisibility="Auto"
                     AcceptsReturn="True" TextWrapping="Wrap"
                     materialDesign:HintAssist.Hint="Descripción"
                     Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -65,8 +74,17 @@
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <DatePicker x:Name="FechaTextBox" FontSize="16" Width="150" Height="50"
                     materialDesign:HintAssist.Hint="Fecha"
-                    SelectedDate="{Binding FechaNacimiento, StringFormat='HH:mm:ss'}"
+                    SelectedDate="{Binding Fecha, StringFormat='HH:mm:ss'}"
                     Style="{StaticResource MaterialDesignFilledDatePicker}"
+                />
+
+                <TextBox x:Name="DireccionTextBox" Text="{Binding Direccion}" Margin="10,0"
+                    Width="640" Height="50" FontSize="16"
+                    materialDesign:HintAssist.Hint="Dirección"
+                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
                 />
             </StackPanel>
 

@@ -1,2 +1,6 @@
 Api falsa temporal:
     https://64839cb5f2e76ae1b95cb373.mockapi.io/Evento
+
+    https://github.com/Platonenkov/Notification.Wpf
+
+    https://github.com/Platonenkov/Notification.Wpf/blob/dev/Documentation.md
