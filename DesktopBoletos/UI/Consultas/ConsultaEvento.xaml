@@ -42,13 +42,14 @@
             </DataGrid>
         </materialDesign:Card>
 
-        <Button x:Name="ChangeButton" Width="70" Height="70"
-            Style="{StaticResource MaterialDesignFloatingActionButton}"
-            Content="{materialDesign:PackIcon DotsHorizontal}"
-            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-            materialDesign:ButtonProgressAssist.Value="-1"
-            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-        />
+        <materialDesign:Card x:Name="ChangeButton" Width="40" Height="40"
+            UniformCornerRadius="14" Padding="4"
+        >
+            <ProgressBar
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="0"
+                IsIndeterminate="True"
+            />
+        </materialDesign:Card>
     </StackPanel>
 </Window>

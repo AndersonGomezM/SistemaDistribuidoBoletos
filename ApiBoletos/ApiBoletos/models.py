@@ -6,8 +6,6 @@ class Eventos(models.Model):
     descripcion = models.CharField(max_length=10000)
     fecha = models.DateTimeField(default=now, blank=True)
     direccion = models.CharField(max_length=200)
-    def __str__(self):
-        return self.nombre
 
 class Boletos(models.Model):
     nombre = models.CharField(max_length=100)
