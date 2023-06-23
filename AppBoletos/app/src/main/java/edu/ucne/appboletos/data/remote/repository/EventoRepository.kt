@@ -22,4 +22,8 @@ class EventoRepository @Inject constructor(
             throw e
         }
     }
+
+    suspend fun putEvento(id: Int, eventodto: EventoDto) {
+        evento.putEvento(id, eventodto)
+    }
 }
