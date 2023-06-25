@@ -22,7 +22,7 @@ namespace DesktopBoletos.UI.Registros
 {
     public partial class ConsultaEvento : Window
     {
-        public string? url = "http://localhost:8000/ApiBoletos/v1/eventos/";
+        public string? url = "http://localhost:8000/ApiBoletos/eventos/";
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 

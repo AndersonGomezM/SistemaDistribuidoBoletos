@@ -10,16 +10,15 @@ namespace DesktopBoletos.Models
 {
     public class Eventos
     {
-        [Key]
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string? Nombre { get; set; }
+        public string? nombre { get; set; }
 
-        public string? Descripcion { get; set; }
+        public string? descripcion { get; set; }
 
-        public DateTime Fecha { get; set; } = DateTime.Now;
+        public DateTime fecha { get; set; } = DateTime.Now;
 
-        public string? Direccion { get; set; }
+        public string? direccion { get; set; }
 
         /*[ForeignKey("Id")]
         public virtual List<Boletas> Productos { get; set; } = new List<Boletas>();*/

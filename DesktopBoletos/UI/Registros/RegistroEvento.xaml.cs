@@ -25,11 +25,9 @@ namespace DesktopBoletos.UI.Consultas
     {
         private Eventos eventos = new Eventos();
 
-        public string? url = "http://127.0.0.1:8000/ApiBoletos/v1/eventos/";
+        public string url = "http://localhost:8000/ApiBoletos/eventos/";
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-
-        private EventosBLL eventosBLL = new EventosBLL();
 
         public RegistroEvento()
         {
@@ -51,26 +49,21 @@ namespace DesktopBoletos.UI.Consultas
             this.eventos = new Eventos();
             this.DataContext = eventos;
         }
-
+        
         public async void POSTEvento(Eventos eventos)
         {
             ChangeButton.Visibility = Visibility.Visible;
+
             using(var httpClient = new HttpClient())
             {
-                var content = new StringContent(JsonConvert.SerializeObject(
-                    new Eventos {
-                        Nombre = NombreTextBox.Text,
-                        Descripcion = DescripcionTextBox.Text,
-                        Fecha = DateTime.Now,
-                        Direccion = DireccionTextBox.Text
-                    }),
-                Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(eventos), Encoding.UTF8, "application/json");
+
                 var response = await httpClient.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK);
+                    MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                    Console.WriteLine("Error");
+                    MessageBox.Show("Hubo un error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             ChangeButton.Visibility = Visibility.Collapsed;

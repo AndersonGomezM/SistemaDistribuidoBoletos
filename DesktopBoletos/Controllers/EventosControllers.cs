@@ -12,7 +12,7 @@ namespace DesktopBoletos.Controllers
 {
     public class EventosControllers
     {
-        public string? url = "http://localhost:8000/ApiBoletos/v1/eventos";
+        /*public string? url = "http://localhost:8000/ApiBoletos/v1/eventos";
 
         HttpClient httpClient = new HttpClient();
 
@@ -41,6 +41,6 @@ namespace DesktopBoletos.Controllers
                 Console.WriteLine("Funciono correctamente");
             else
                 Console.WriteLine("Error");
-        }
+        }*/
     }
 }

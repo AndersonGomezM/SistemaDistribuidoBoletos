@@ -17,7 +17,7 @@ namespace DesktopBoletos.BLL
 
         public bool Guardar(Eventos eventos)
         {
-            controllers.POSTEvento(eventos);
+            //controllers.POSTEvento(eventos);
             return true;
         }
 
