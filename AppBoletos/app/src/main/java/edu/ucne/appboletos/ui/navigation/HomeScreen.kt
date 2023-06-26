@@ -9,13 +9,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -27,8 +25,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import edu.ucne.appboletos.R
+import edu.ucne.appboletos.ui.eventos.EventoScreen
+import edu.ucne.appboletos.ui.eventos_selected.EventoSelectedScreen
+import edu.ucne.appboletos.ui.guardados.GuardadosListScreen
 import edu.ucne.appboletos.ui.theme.AppBoletosTheme
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -37,7 +39,7 @@ fun HomeScreen(navController: NavController) {
         val navControllerMenu = rememberNavController()
 
         val items = listOf(
-            Screen.CategoriaScreen,
+            Screen.EventoScreen,
             Screen.GuardadosListScreen
         )
 
@@ -57,28 +59,22 @@ fun HomeScreen(navController: NavController) {
 private fun Menu(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.CategoriaScreen.route
+        startDestination = Screen.EventoScreen.route
     ) {
-        composable(Screen.CategoriaScreen.route){
-            CategoriaScreen(
-                onClickCategoriaList = { navController.navigate(Screen.CategoriaListScreen.route) }
-            )
-        }
-
-        composable(Screen.CategoriaListScreen.route){
-            CategoriaListScreen(
+        composable(Screen.EventoScreen.route){
+            EventoScreen(
                 onNavigateBack = { navController.navigateUp() }
             ) {
-                navController.navigate(Screen.CategoriaSelectedScreen.route + "/$it")
+                navController.navigate(Screen.EventoSelectedScreen.route + "/$it")
             }
         }
 
         composable(
-            Screen.CategoriaSelectedScreen.route + "/{id}",
+            Screen.EventoSelectedScreen.route + "/{id}",
             arguments = listOf(navArgument("id") {type = NavType.IntType })
         ){
             val id = it.arguments?.getInt("id") ?: 0
-            CategoriaSelectedScreen(
+            EventoSelectedScreen(
                 id = id,
                 onNavigateBack = { navController.navigateUp() }
             )
@@ -88,10 +84,6 @@ private fun Menu(navController: NavHostController) {
             GuardadosListScreen(
                 onClickSelected = { navController.navigate(Screen.CategoriaSelectedScreen.route) }
             )
-        }
-
-        composable(Screen.InformacionScreen.route){
-            InformacionScreen({ navController.navigateUp() })
         }
     }
 }
