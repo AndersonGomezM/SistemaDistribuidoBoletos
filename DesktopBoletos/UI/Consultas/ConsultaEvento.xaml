@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:DesktopBoletos.UI.Registros"
         mc:Ignorable="d"
         Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
-        WindowStartupLocation="CenterScreen"
-        Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}" >
+        WindowStartupLocation="CenterScreen" Background="{StaticResource MaterialDesignPaper}"
+        Foreground="{StaticResource MaterialDesignBody}" >
 
     <StackPanel>
         <Menu>
@@ -22,25 +22,27 @@
             </Button>
         </Menu>
 
-        <materialDesign:Card Margin="10,20" materialDesign:ShadowAssist.ShadowDepth="Depth3" >
-            <DataGrid x:Name="EventosData" IsReadOnly="true"
-                ItemsSource="{Binding Path=Eventos}"
-                SelectedItem="{Binding Path=SelectedEmpleados, Mode=TwoWay}"
-            >
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate> 
-                            <DataTemplate> 
-                                <Button  x:Name="VerDatos" Content="👁" Click="Ver_Click"
-                                    Style="{StaticResource MaterialDesignOutlinedLightButton}"
-                                    ToolTip="MaterialDesignOutlinedButton"
-                                />
-                            </DataTemplate> 
-                        </DataGridTemplateColumn.CellTemplate> 
-                </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </materialDesign:Card>
+        <Grid Margin="10,20" Height="400">
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" >
+                <DataGrid x:Name="EventosData" IsReadOnly="true"
+                    ItemsSource="{Binding Path=Eventos}"
+                    SelectedItem="{Binding Path=SelectedEventos, Mode=TwoWay}"
+                >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button  x:Name="VerDatos" Content="👁" Click="Ver_Click"
+                                        Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                                        ToolTip="MaterialDesignOutlinedButton"
+                                    />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </materialDesign:Card>
+        </Grid>
 
         <materialDesign:Card x:Name="ChangeButton" Width="40" Height="40"
             UniformCornerRadius="14" Padding="4"

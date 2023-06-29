@@ -12,8 +12,6 @@ namespace DesktopBoletos.DAL
     {
         public DbSet<User>? User { get; set; }
 
-        public DbSet<Boletas>? Boletas { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(@"Data Source = Data\DataBase.db");

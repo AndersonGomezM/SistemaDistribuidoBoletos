@@ -29,6 +29,8 @@ namespace DesktopBoletos.UI.Consultas
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
+        HttpClient httpClient = new HttpClient();
+
         public RegistroEvento()
         {
             InitializeComponent();
@@ -37,6 +39,22 @@ namespace DesktopBoletos.UI.Consultas
             this.DataContext = eventos;
         }
 
+        public async void POSTEvento(Eventos eventos)
+        {
+            ChangeButton.Visibility = Visibility.Visible;
+
+            var content = new StringContent(JsonConvert.SerializeObject(eventos), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
+                MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            ChangeButton.Visibility = Visibility.Collapsed;
+        }
+        
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             UIMenu menu = new UIMenu();
@@ -48,25 +66,6 @@ namespace DesktopBoletos.UI.Consultas
         {
             this.eventos = new Eventos();
             this.DataContext = eventos;
-        }
-        
-        public async void POSTEvento(Eventos eventos)
-        {
-            ChangeButton.Visibility = Visibility.Visible;
-
-            using(var httpClient = new HttpClient())
-            {
-                var content = new StringContent(JsonConvert.SerializeObject(eventos), Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync(url, content);
-
-                if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show("Hubo un error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            ChangeButton.Visibility = Visibility.Collapsed;
         }
 
         private void ConsultarButton_Click(object sender, RoutedEventArgs e)

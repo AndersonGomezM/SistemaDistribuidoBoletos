@@ -25,33 +25,31 @@ namespace DesktopBoletos.UI.Registros
         public string? url = "http://localhost:8000/ApiBoletos/eventos/";
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-
-        EventosBLL eventosBLL = new EventosBLL();
+        
+        HttpClient httpClient = new HttpClient();
 
         public ConsultaEvento()
         {
             InitializeComponent();
-            ConectionEvento();
+            GetEvento();
         }
 
-        private async void ConectionEvento()
+        private async void GetEvento()
         {
-            
-            using(var httpClient = new HttpClient())
-            {
-                var response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStreamAsync();
-                    var list = JsonSerializer.Deserialize<List<Eventos>>(content, options);
+            var response = await httpClient.GetAsync(url);
 
-                    EventosData.ItemsSource = null;
-                    EventosData.ItemsSource = list;
-                    ChangeButton.Visibility = Visibility.Collapsed;
-                }
-                else
-                    Console.WriteLine("Error");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStreamAsync();
+                var list = JsonSerializer.Deserialize<List<Eventos>>(content, options);
+
+                EventosData.ItemsSource = null;
+                EventosData.ItemsSource = list;
             }
+            else
+                MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
+            ChangeButton.Visibility = Visibility.Collapsed;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

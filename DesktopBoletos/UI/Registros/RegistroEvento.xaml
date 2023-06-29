@@ -21,94 +21,116 @@
                 </Button.Background>
             </Button>
         </Menu>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="Auto" >
 
-        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center">
-            <StackPanel HorizontalAlignment="Center">
-                <Label Content="Registro de Eventos" FontSize="30" />
-            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top">
 
-            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <StackPanel HorizontalAlignment="Center">
+                    <Label Content="Registro de Eventos" FontSize="30" />
+                </StackPanel>
 
-                <TextBox x:Name="IdTextBox" Text="{Binding id}" Width="80" Height="55"
-                    FontSize="16" IsReadOnly="true"
-                    materialDesign:HintAssist.Hint="Id"
-                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                    AcceptsReturn="True"
-                />
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,5">
 
-                <Button Content="🔍" FontSize="16" Margin="5,0" Height="55"
-                    Click="ConsultarButton_Click"
-                    Style="{StaticResource MaterialDesignOutlinedLightButton}"
-                    ToolTip="MaterialDesignOutlinedButton"
-                />
-
-                <materialDesign:Card x:Name="ChangeButton" Margin="10,0" Width="40" Height="40"
-                    UniformCornerRadius="14" Padding="5" Visibility="Collapsed"
-                >
-                    <ProgressBar
-                        Style="{StaticResource MaterialDesignCircularProgressBar}"
-                        Value="0"
-                        IsIndeterminate="True"
+                    <TextBox x:Name="IdTextBox" Text="{Binding id}" Width="80" Height="55"
+                        FontSize="16" IsReadOnly="true"
+                        materialDesign:HintAssist.Hint="Id"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        AcceptsReturn="True"
                     />
-                </materialDesign:Card>
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBox x:Name="NombreTextBox" Text="{Binding nombre}" Width="400" Height="55" FontSize="16"
-                    materialDesign:HintAssist.Hint="Nombre"
-                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                />
-            </StackPanel>
+                    <Button Content="🔍" FontSize="16" Margin="5,0" Height="55"
+                        Click="ConsultarButton_Click"
+                        Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                        ToolTip="MaterialDesignOutlinedButton"
+                    />
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBox x:Name="DescripcionTextBox" Text="{Binding descripcion}" Width="800" Height="100"
-                    FontSize="16" VerticalScrollBarVisibility="Auto"
-                    AcceptsReturn="True" TextWrapping="Wrap"
-                    materialDesign:HintAssist.Hint="Descripción"
-                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                />
-            </StackPanel>
+                    <materialDesign:Card x:Name="ChangeButton" Margin="10,0" Width="40" Height="40"
+                        UniformCornerRadius="14" Padding="5" Visibility="Collapsed"
+                    >
+                        <ProgressBar
+                            Style="{StaticResource MaterialDesignCircularProgressBar}"
+                            Value="0"
+                            IsIndeterminate="True"
+                        />
+                    </materialDesign:Card>
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <DatePicker x:Name="FechaDatePiker" FontSize="16" Width="150" Height="55"
-                    materialDesign:HintAssist.Hint="Fecha"
-                    SelectedDate="{Binding fecha, StringFormat='HH:mm:ss'}"
-                    Style="{StaticResource MaterialDesignFilledDatePicker}"
-                />
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBox x:Name="NombreTextBox" Text="{Binding nombre}" Width="400" Height="55" FontSize="16"
+                        materialDesign:HintAssist.Hint="Nombre"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                    />
+                </StackPanel>
 
-                <TextBox x:Name="DireccionTextBox" Text="{Binding direccion}" Margin="10,0"
-                    Width="640" Height="55" FontSize="16"
-                    materialDesign:HintAssist.Hint="Dirección"
-                    Style="{StaticResource MaterialDesignFilledTextBox}"
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                />
-            </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBox x:Name="DescripcionTextBox" Text="{Binding descripcion}" Width="800" Height="100"
+                        FontSize="16" VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True" TextWrapping="Wrap"
+                        materialDesign:HintAssist.Hint="Descripción"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                    />
+                </StackPanel>
 
-            <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Nuevo" Height="35" Width="130" FontSize="16" Margin="10,2"
-                    Click="NuevoButton_Click"
-                    Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                    ToolTip="MaterialDesignFlatLightButton"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                />
-                <Button Content="Guardar" Height="35" Width="130" FontSize="16" Margin="10,2"
-                    Click="GuardarButton_Click"
-                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                    ToolTip="MaterialDesignFlatMidButton"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                />
-                <Button Content="Eliminar" Height="35" Width="130" FontSize="16" Margin="10,2"
-                    Click="EliminarButton_Click"
-                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                    ToolTip="MaterialDesignFlatDarkButton"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                />
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <DatePicker x:Name="FechaDatePiker" FontSize="16" Width="150" Height="55"
+                        materialDesign:HintAssist.Hint="Fecha"
+                        SelectedDate="{Binding fecha, StringFormat='HH:mm:ss'}"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                    />
+
+                    <materialDesign:TimePicker x:Name="FechaTimePiker"
+                        FontSize="16" Width="150" Height="55" Margin="10,0"
+                        materialDesign:HintAssist.Hint="Hora de inicio"
+                        SelectedTime="{Binding fecha, StringFormat='HH:mm:ss'}"
+                        Style="{StaticResource MaterialDesignFilledTimePicker}"
+                    />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBox x:Name="DireccionTextBox" Text="{Binding direccion}"
+                        Width="640" Height="55" FontSize="16"
+                        materialDesign:HintAssist.Hint="Dirección"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                    />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" >
+                        <DataGrid x:Name="BoletosData" IsReadOnly="true"
+                            ItemsSource="{Binding Path=Eventos}"
+                            SelectedItem="{Binding Path=SelectedEventos, Mode=TwoWay}"
+                        />
+                    </materialDesign:Card>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Nuevo" Height="35" Width="130" FontSize="16" Margin="10,2"
+                        Click="NuevoButton_Click"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                        ToolTip="MaterialDesignFlatLightButton"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    />
+                    <Button Content="Guardar" Height="35" Width="130" FontSize="16" Margin="10,2"
+                        Click="GuardarButton_Click"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        ToolTip="MaterialDesignFlatMidButton"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    />
+                    <Button Content="Eliminar" Height="35" Width="130" FontSize="16" Margin="10,2"
+                        Click="EliminarButton_Click"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        ToolTip="MaterialDesignFlatDarkButton"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </StackPanel>
 </Window>
