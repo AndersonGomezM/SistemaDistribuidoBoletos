@@ -1,9 +1,11 @@
 package edu.ucne.appboletos.data.remote.dto
 
+import java.time.LocalDateTime
+
 data class EventoDto(
-    val Id: Int,
-    val Nombre: String,
-    val Descripcion: String,
-    val Fecha: String,
-    val Direccion: String,
+    val id: Int,
+    val nombre: String,
+    val descripcion: String,
+    val fecha: String,
+    val direccion: String,
 )

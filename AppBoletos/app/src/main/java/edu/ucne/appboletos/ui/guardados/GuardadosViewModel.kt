@@ -2,11 +2,11 @@ package edu.ucne.appboletos.ui.guardados
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ucne.empleosdoapp.data.local.entity.Empleos
-import com.ucne.empleosdoapp.data.local.repository.EmpleosRepository
-import com.ucne.empleosdoapp.data.remote.dto.EmpleoDto
-import com.ucne.empleosdoapp.data.remote.repository.EmpleoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import edu.ucne.appboletos.data.local.entity.Evento
+import edu.ucne.appboletos.data.local.repository.EventosRepository
+import edu.ucne.appboletos.data.remote.dto.EventoDto
+import edu.ucne.appboletos.data.remote.repository.EventoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class GuardadosUiState(
-    val empleo: EmpleoDto = EventoDto(
+    val evento: EventoDto = EventoDto(
         0,
         "",
         "",
@@ -25,26 +25,27 @@ data class GuardadosUiState(
     )
 )
 
-data class EmpleosLocalUiState(
-    val empleos: List<Empleos> = emptyList()
+data class EventosLocalUiState(
+    val eventos: List<Evento> = emptyList()
 )
 
 @HiltViewModel
 class GuardadosViewModel @Inject constructor(
-    private val repository: EmpleoRepository,
-    private val repositoryLocal: EmpleosRepository
+    private val repository: EventoRepository,
+    private val repositoryLocal: EventosRepository
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(GuardadosUiState())
     val uiState: StateFlow<GuardadosUiState> = _uiState.asStateFlow()
-    private val _uiStateLocal = MutableStateFlow(EmpleosLocalUiState())
-    val uiStateLocal: StateFlow<EmpleosLocalUiState> = _uiStateLocal.asStateFlow()
+
+    private val _uiStateLocal = MutableStateFlow(EventosLocalUiState())
+    val uiStateLocal: StateFlow<EventosLocalUiState> = _uiStateLocal.asStateFlow()
 
     init {
         viewModelScope.launch {
             repositoryLocal.getAll().collect { list ->
                 _uiStateLocal.update {
-                    it.copy(empleos = list)
+                    it.copy(eventos = list)
                 }
             }
         }
@@ -53,14 +54,14 @@ class GuardadosViewModel @Inject constructor(
     fun getById(id: Int) {
         viewModelScope.launch {
             _uiState.update {
-                it.copy(empleo = repository.getEmpleo(id))
+                it.copy(evento = repository.getEvento(id))
             }
         }
     }
 
-    fun Delete(empleos: Empleos) {
+    fun Delete(evento: Evento) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryLocal.delete(empleos)
+            repositoryLocal.delete(evento)
         }
     }
 }

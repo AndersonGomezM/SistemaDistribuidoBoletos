@@ -62,9 +62,7 @@ private fun Menu(navController: NavHostController) {
         startDestination = Screen.EventoScreen.route
     ) {
         composable(Screen.EventoScreen.route){
-            EventoScreen(
-                onNavigateBack = { navController.navigateUp() }
-            ) {
+            EventoScreen() {
                 navController.navigate(Screen.EventoSelectedScreen.route + "/$it")
             }
         }
@@ -82,7 +80,7 @@ private fun Menu(navController: NavHostController) {
 
         composable(Screen.GuardadosListScreen.route){
             GuardadosListScreen(
-                onClickSelected = { navController.navigate(Screen.CategoriaSelectedScreen.route) }
+                onClickSelected = { navController.navigate(Screen.EventoSelectedScreen.route) }
             )
         }
     }

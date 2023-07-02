@@ -26,7 +26,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideApiBoletas(moshi: Moshi): EventoApi {
-        val Base_Url = "http://"
+        val Base_Url = "https://bb12-192-141-131-61.ngrok-free.app/ApiBoletos/"
         return Retrofit.Builder()
             .baseUrl(Base_Url)
             .addConverterFactory(MoshiConverterFactory.create(moshi))

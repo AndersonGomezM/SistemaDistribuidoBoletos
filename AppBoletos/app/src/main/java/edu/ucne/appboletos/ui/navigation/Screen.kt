@@ -5,4 +5,5 @@ sealed class Screen(val route: String) {
     object EventoScreen: Screen("Eventos")
     object EventoSelectedScreen: Screen("Seleccionado")
     object GuardadosListScreen: Screen("Guardados")
+    object ConexionScreen: Screen("Conexion")
 }
