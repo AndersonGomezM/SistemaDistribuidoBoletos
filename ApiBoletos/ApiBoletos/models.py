@@ -8,12 +8,11 @@ class Eventos(models.Model):
     direccion = models.CharField(max_length=200)
 
 class Boletos(models.Model):
-    nombre = models.CharField(max_length=100)
-    precio = models.FloatField(max_length=100000)
-    cantidad = models.PositiveSmallIntegerField()
     eventos = models.ForeignKey(Eventos, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+    cantidad = models.PositiveSmallIntegerField()
     def __str__(self):
-        return self.nombre
+        return self.eventos
     
     class Meta:
-        ordering = ["nombre"]
+        ordering = ["eventos"]
