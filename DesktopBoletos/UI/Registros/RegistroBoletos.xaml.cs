@@ -18,11 +18,14 @@ using System.Text.Json;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace DesktopBoletos.UI.Consultas
+namespace DesktopBoletos.UI.Registros
 {
-    public partial class RegistroEvento : Window
+    /// <summary>
+    /// Interaction logic for RegistroBoletos.xaml
+    /// </summary>
+    public partial class RegistroBoletos : Window
     {
-        private Eventos eventos = new Eventos();
+        private Boletas boletos = new Boletas();
 
         public string url = "http://localhost:8000/ApiBoletos/";
 
@@ -30,28 +33,44 @@ namespace DesktopBoletos.UI.Consultas
 
         HttpClient httpClient = new HttpClient();
 
-        public RegistroEvento()
+        public RegistroBoletos()
         {
             InitializeComponent();
 
             this.DataContext = null;
-            this.DataContext = eventos;
+            this.DataContext = boletos;
+            GetEvento();
         }
 
-        public async void POSTEvento(Eventos eventos)
+        public async void POSTBoletos(Boletas boletos)
         {
             ChangeProgressBar.Visibility = Visibility.Visible;
 
-            var content = new StringContent(JsonConvert.SerializeObject(eventos), Encoding.UTF8, "application/json");
+            boletos.eventos += 1;
+            var content = new StringContent(JsonConvert.SerializeObject(boletos), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync(url + "eventos/", content);
+            var response = await httpClient.PostAsync(url + "boletos/", content);
 
             if (response.IsSuccessStatusCode)
-                MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Se ha enviado con exito", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
             else
-                MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Hubo un error de comunicación " + EventoComboBox.SelectedIndex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             ChangeProgressBar.Visibility = Visibility.Collapsed;
+        }
+
+        private async void GetEvento()
+        {
+            var response = await httpClient.GetAsync(url + "eventos/");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStreamAsync();
+                var list = System.Text.Json.JsonSerializer.Deserialize<List<Eventos>>(content, options);
+
+                foreach(var item in list)
+                    EventoComboBox.Items.Add(item.nombre + " (" + item.id + ")");
+            }
         }
         
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -63,8 +82,8 @@ namespace DesktopBoletos.UI.Consultas
 
         private void Limpiar()
         {
-            this.eventos = new Eventos();
-            this.DataContext = eventos;
+            this.boletos = new Boletas();
+            this.DataContext = boletos;
         }
 
         private void ConsultarButton_Click(object sender, RoutedEventArgs e)
@@ -79,7 +98,7 @@ namespace DesktopBoletos.UI.Consultas
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            POSTEvento(eventos);
+            POSTBoletos(boletos);
         }
     }
 }

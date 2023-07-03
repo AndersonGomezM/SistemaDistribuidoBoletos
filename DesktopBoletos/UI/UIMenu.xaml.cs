@@ -33,11 +33,24 @@ namespace DesktopBoletos.UI
             registroEvento.Show();
             this.Close();
         }
+        private void RegistroBoletos_Click(object sender, RoutedEventArgs e)
+        {
+            RegistroBoletos registroBoleto = new RegistroBoletos();
+            registroBoleto.Show();
+            this.Close();
+        }
 
         private void ConsultaEventos_Click(object sender, RoutedEventArgs e)
         {
             ConsultaEvento consultaEvento = new ConsultaEvento();
             consultaEvento.Show();
+            this.Close();
+        }
+
+        private void ConsultaBoletos_Click(object sender, RoutedEventArgs e)
+        {
+            ConsultaBoletos consultaBoletos = new ConsultaBoletos();
+            consultaBoletos.Show();
             this.Close();
         }
     }

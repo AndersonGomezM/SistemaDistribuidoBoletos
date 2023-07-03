@@ -1,10 +1,10 @@
-<Window x:Class="DesktopBoletos.UI.Registros.ConsultaEvento"
+<Window x:Class="DesktopBoletos.UI.Consultas.ConsultaBoletos"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:local="clr-namespace:DesktopBoletos.UI.Registros"
+    xmlns:local="clr-namespace:DesktopBoletos.UI.Consultas"
     mc:Ignorable="d"
     Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
     WindowStartupLocation="CenterScreen" Background="{StaticResource MaterialDesignPaper}"
@@ -23,14 +23,15 @@
         </Menu>
 
         <StackPanel HorizontalAlignment="Center">
-            <Label Content="Consulta de Eventos" FontSize="30" />
+            <Label Content="Consulta de Boletos" FontSize="30" />
         </StackPanel>
 
         <Grid Margin="10,20" Height="400">
+
             <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" >
-                <DataGrid x:Name="EventosData" IsReadOnly="true"
-                    ItemsSource="{Binding Path=Eventos}"
-                    SelectedItem="{Binding Path=SelectedEventos, Mode=TwoWay}"
+                <DataGrid x:Name="BoletasData" IsReadOnly="true"
+                    ItemsSource="{Binding Path=Boletas}"
+                    SelectedItem="{Binding Path=SelectedBoletas, Mode=TwoWay}"
                 >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>

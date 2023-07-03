@@ -14,10 +14,12 @@
         <Menu materialDesign:ShadowAssist.ShadowDepth="Depth2" >
             <MenuItem Header="Registros">
                 <MenuItem Header="Registro de Eventos" Click="RegistroEventos_Click" />
+                <MenuItem Header="Registro de Boletos" Click="RegistroBoletos_Click" />
             </MenuItem>
 
             <MenuItem Header="Consultas">
                 <MenuItem Header="Consulta de Eventos" Click="ConsultaEventos_Click" />
+                <MenuItem Header="Consulta de Boletos" Click="ConsultaBoletos_Click" />
             </MenuItem>
 
         </Menu>

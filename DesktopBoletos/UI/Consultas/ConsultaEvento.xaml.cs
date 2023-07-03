@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DesktopBoletos.Models;
 using DesktopBoletos.BLL;
-
 using System.Text.Json;
 using System.Net.Http;
 
@@ -22,7 +21,7 @@ namespace DesktopBoletos.UI.Registros
 {
     public partial class ConsultaEvento : Window
     {
-        public string? url = "http://localhost:8000/ApiBoletos/eventos/";
+        public string? url = "http://localhost:8000/ApiBoletos/";
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
         
@@ -36,7 +35,7 @@ namespace DesktopBoletos.UI.Registros
 
         private async void GetEvento()
         {
-            var response = await httpClient.GetAsync(url);
+            var response = await httpClient.GetAsync(url + "eventos/");
 
             if (response.IsSuccessStatusCode)
             {
@@ -49,7 +48,7 @@ namespace DesktopBoletos.UI.Registros
             else
                 MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             
-            ChangeButton.Visibility = Visibility.Collapsed;
+            ChangeProgressBar.Visibility = Visibility.Collapsed;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

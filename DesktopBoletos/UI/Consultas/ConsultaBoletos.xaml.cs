@@ -16,44 +16,41 @@ using DesktopBoletos.Models;
 using DesktopBoletos.BLL;
 using System.Text.Json;
 using System.Net.Http;
-using Newtonsoft.Json;
 
 namespace DesktopBoletos.UI.Consultas
 {
-    public partial class RegistroEvento : Window
+    public partial class ConsultaBoletos : Window
     {
-        private Eventos eventos = new Eventos();
-
-        public string url = "http://localhost:8000/ApiBoletos/";
+        public string? url = "http://localhost:8000/ApiBoletos/";
 
         JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-
+    
         HttpClient httpClient = new HttpClient();
 
-        public RegistroEvento()
+        public ConsultaBoletos()
         {
             InitializeComponent();
-
-            this.DataContext = null;
-            this.DataContext = eventos;
+            GetBoletos();
         }
 
-        public async void POSTEvento(Eventos eventos)
+        private async void GetBoletos()
         {
-            ChangeProgressBar.Visibility = Visibility.Visible;
-
-            var content = new StringContent(JsonConvert.SerializeObject(eventos), Encoding.UTF8, "application/json");
-
-            var response = await httpClient.PostAsync(url + "eventos/", content);
+            var response = await httpClient.GetAsync(url + "boletos/");
 
             if (response.IsSuccessStatusCode)
-                MessageBox.Show("Funciono correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            {
+                var content = await response.Content.ReadAsStreamAsync();
+                var list = JsonSerializer.Deserialize<List<Boletas>>(content, options);
+
+                BoletasData.ItemsSource = null;
+                BoletasData.ItemsSource = list;
+            }
             else
                 MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
+            
             ChangeProgressBar.Visibility = Visibility.Collapsed;
         }
-        
+
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             UIMenu menu = new UIMenu();
@@ -61,25 +58,9 @@ namespace DesktopBoletos.UI.Consultas
             this.Close();
         }
 
-        private void Limpiar()
-        {
-            this.eventos = new Eventos();
-            this.DataContext = eventos;
-        }
-
-        private void ConsultarButton_Click(object sender, RoutedEventArgs e)
+        private void Ver_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void NuevoButton_Click(object sender, RoutedEventArgs e)
-        {
-            Limpiar();
-        }
-
-        private void GuardarButton_Click(object sender, RoutedEventArgs e)
-        {
-            POSTEvento(eventos);
         }
     }
 }
