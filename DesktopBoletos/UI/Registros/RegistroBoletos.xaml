@@ -8,13 +8,12 @@
     mc:Ignorable="d"
     Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
     WindowStartupLocation="CenterScreen"
-    Background="{StaticResource MaterialDesignPaper}"
-    Foreground="{StaticResource MaterialDesignBody}"
+    Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}"
 >
 
     <StackPanel>
         <Menu>
-            <Button Click="Back_Click" Style="{StaticResource MaterialDesignIconForegroundButton}"
+            <Button x:Name="Back" Click="Back_Click" Style="{StaticResource MaterialDesignIconForegroundButton}"
                 ToolTip="MaterialDesignIconForegroundButton"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                 <Button.Background>
@@ -38,12 +37,6 @@
                         materialDesign:HintAssist.Hint="Id"
                         Style="{StaticResource MaterialDesignFilledTextBox}"
                         AcceptsReturn="True"
-                    />
-
-                    <Button Content="🔍" FontSize="16" Margin="5,0" Height="55"
-                        Click="ConsultarButton_Click"
-                        Style="{StaticResource MaterialDesignOutlinedLightButton}"
-                        ToolTip="MaterialDesignOutlinedButton"
                     />
 
                     <materialDesign:Card x:Name="ChangeProgressBar" Margin="10,0" Width="40" Height="40"
@@ -94,6 +87,12 @@
                         Click="GuardarButton_Click"
                         Style="{StaticResource MaterialDesignFlatMidBgButton}"
                         ToolTip="MaterialDesignFlatMidButton"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    />
+                    <Button x:Name="EliminarButton" Content="Eliminar" Height="35" Width="130" FontSize="16" Margin="10,2"
+                        Click="EliminarButton_Click" Visibility="Collapsed"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        ToolTip="MaterialDesignFlatDarkButton"
                         materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     />
                 </StackPanel>

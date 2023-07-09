@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:DesktopBoletos.UI.Consultas"
     mc:Ignorable="d"
     Title="Gestor de Eventos" Height="600" Width="900" Icon="\Img\Icono.png"
-    WindowStartupLocation="CenterScreen" Background="{StaticResource MaterialDesignPaper}"
-    Foreground="{StaticResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen" Focusable="EventoFocus"
+    Background="{StaticResource MaterialDesignPaper}" Foreground="{StaticResource MaterialDesignBody}"
 >
     <StackPanel>
         <Menu>

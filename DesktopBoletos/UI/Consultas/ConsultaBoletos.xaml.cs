@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DesktopBoletos.Models;
-using DesktopBoletos.BLL;
+using DesktopBoletos.UI.Registros;
 using System.Text.Json;
 using System.Net.Http;
 
@@ -60,7 +60,14 @@ namespace DesktopBoletos.UI.Consultas
 
         private void Ver_Click(object sender, RoutedEventArgs e)
         {
+            Boletas boleto = (Boletas)BoletasData.SelectedItem;            
+            RegistroBoletos registroBoletos = new RegistroBoletos(boleto);
+            registroBoletos.Show();
+        }
 
+        private void EventoFocus(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

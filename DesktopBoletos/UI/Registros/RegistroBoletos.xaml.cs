@@ -25,7 +25,7 @@ namespace DesktopBoletos.UI.Registros
     /// </summary>
     public partial class RegistroBoletos : Window
     {
-        private Boletas boletos = new Boletas();
+        private Boletas boletos;
 
         public string url = "http://localhost:8000/ApiBoletos/";
 
@@ -37,10 +37,26 @@ namespace DesktopBoletos.UI.Registros
         {
             InitializeComponent();
 
+            boletos = new Boletas();
             this.DataContext = null;
             this.DataContext = boletos;
             GetEvento();
         }
+
+        public RegistroBoletos(Boletas boleto)
+        {
+            InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+            Back.Visibility = Visibility.Collapsed;
+            EliminarButton.Visibility = Visibility.Visible;
+            boletos = boleto;
+            boletos.eventos -= 1;
+            this.DataContext = null;
+            this.DataContext = boletos;
+            GetEvento();
+        }
+
 
         public async void POSTBoletos(Boletas boletos)
         {
@@ -51,10 +67,45 @@ namespace DesktopBoletos.UI.Registros
 
             var response = await httpClient.PostAsync(url + "boletos/", content);
 
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode) {
                 MessageBox.Show("Se ha enviado con exito", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-            else
+                Limpiar();
+            } else
                 MessageBox.Show("Hubo un error de comunicación " + EventoComboBox.SelectedIndex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            ChangeProgressBar.Visibility = Visibility.Collapsed;
+        }
+
+        public async void PUTBoletos(Boletas boletos)
+        {
+            ChangeProgressBar.Visibility = Visibility.Visible;
+
+            boletos.eventos += 1;
+            var content = new StringContent(JsonConvert.SerializeObject(boletos), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(url + "boletos/" + boletos.id + "/", content);
+
+            if (response.IsSuccessStatusCode) {
+                MessageBox.Show("Se modifico correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                Limpiar();
+            } else
+                MessageBox.Show("Hubo un error de comunicación " + EventoComboBox.SelectedIndex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            ChangeProgressBar.Visibility = Visibility.Collapsed;
+        }
+
+        public async void DELETEBoletos(Boletas boletos)
+        {
+            ChangeProgressBar.Visibility = Visibility.Visible;
+
+            var response = await httpClient.DeleteAsync(url + "boletos/" + boletos.id + "/");
+
+            if (response.IsSuccessStatusCode) {
+                MessageBox.Show("Se ha eliminado el boleto con exito", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                Limpiar();
+            }
+            else
+                MessageBox.Show("Hubo un error de comunicación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             ChangeProgressBar.Visibility = Visibility.Collapsed;
         }
@@ -68,8 +119,11 @@ namespace DesktopBoletos.UI.Registros
                 var content = await response.Content.ReadAsStreamAsync();
                 var list = System.Text.Json.JsonSerializer.Deserialize<List<Eventos>>(content, options);
 
-                foreach(var item in list)
-                    EventoComboBox.Items.Add(item.nombre + " (" + item.id + ")");
+                if(list != null)
+                    foreach(var item in list)
+                        EventoComboBox.Items.Add(item.nombre + " (" + item.id + ")");
+                else
+                    EventoComboBox.Items.Add("Lista vacia");
             }
         }
         
@@ -86,11 +140,6 @@ namespace DesktopBoletos.UI.Registros
             this.DataContext = boletos;
         }
 
-        private void ConsultarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
@@ -98,7 +147,15 @@ namespace DesktopBoletos.UI.Registros
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            POSTBoletos(boletos);
+            if(boletos.id > 0)
+                PUTBoletos(boletos);
+            else
+                POSTBoletos(boletos);
+        }
+
+        private void EliminarButton_Click(object sender, RoutedEventArgs e)
+        {
+            DELETEBoletos(boletos);
         }
     }
 }

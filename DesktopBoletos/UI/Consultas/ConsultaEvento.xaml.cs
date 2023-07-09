@@ -13,11 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DesktopBoletos.Models;
-using DesktopBoletos.BLL;
+using DesktopBoletos.UI.Registros;
 using System.Text.Json;
 using System.Net.Http;
 
-namespace DesktopBoletos.UI.Registros
+namespace DesktopBoletos.UI.Consultas
 {
     public partial class ConsultaEvento : Window
     {
@@ -60,7 +60,9 @@ namespace DesktopBoletos.UI.Registros
 
         private void Ver_Click(object sender, RoutedEventArgs e)
         {
-
+            Eventos evento = (Eventos)EventosData.SelectedItem;            
+            RegistroEvento registroEvento = new RegistroEvento(evento);
+            registroEvento.Show();
         }
     }
 }
