@@ -1,12 +1,16 @@
 package edu.ucne.appboletos.ui.eventos_selected
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import edu.ucne.appboletos.R
+import edu.ucne.appboletos.data.remote.dto.BoletosDto
 import edu.ucne.appboletos.data.remote.dto.EventoDto
 import edu.ucne.appboletos.ui.theme.AppBoletosTheme
 
@@ -45,7 +51,11 @@ fun EventoSelectedScreen(
         0
     }
 
+    viewModel.getBoletos()
+
     val uiState by viewModel.uiState.collectAsState()
+    val uiState2 by viewModel.uiState2.collectAsState()
+
     val scrollState = rememberScrollState()
     AppBoletosTheme {
         Scaffold(
@@ -74,16 +84,25 @@ fun EventoSelectedScreen(
                 }
             }
         ) {
+            Spacer(modifier = Modifier.height(80.dp))
+
             Column {
                 Spacer(modifier = Modifier.height(50.dp))
-                Banner(uiState.evento)
+                Banner()
                 Spacer(modifier = Modifier.height(10.dp))
                 Titulo(uiState.evento)
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Column(modifier = Modifier.verticalScroll(scrollState)) {
                     Descripcion(uiState.evento)
-                    //Boletas(uiState.evento)
+                    if (uiState2.boletos == null) {
+                        LazyColumn(modifier = Modifier) {
+                            items(uiState2.boletos) { boleto ->
+                                if (boleto.evento == uiState.evento.id)
+                                    Boletas(boleto)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -91,7 +110,7 @@ fun EventoSelectedScreen(
 }
 
 @Composable
-private fun Banner(evento: EventoDto) {
+private fun Banner() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -153,45 +172,47 @@ private fun Descripcion(evento: EventoDto) {
         Text(text = "   " + evento.fecha.format("dd/MM/yyyy HH:mm") + "\n", fontSize = 12.sp)
         Text(text = "Dirección:", fontWeight = FontWeight.Black, fontSize = 14.sp)
         Text(text = "   " + evento.direccion + "\n", fontSize = 12.sp)
-        Text(text = "Descripción: \n\n", fontWeight = FontWeight.Black, fontSize = 14.sp)
+        Text(text = "Descripción: \n", fontWeight = FontWeight.Black, fontSize = 14.sp)
         Text(text = "   " + evento.descripcion + "\n", fontSize = 12.sp)
     }
 }
 
-/*@Composable
+@Composable
 private fun Boletas(
-    evento: EventoDto
+    boletos: BoletosDto,
+    viewModel: EventoSelectedViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    Row(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
             .padding(2.dp, 0.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
     ){
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier
-                .width(195.dp)
-                .padding(2.dp, 0.dp),
-            border = BorderStroke(2.dp, ColorPri),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
-        ) {
-            Text(text = "Guardar", color = ColorPri)
-        }
-        Button(
-            onClick = {
-                val uri = Uri.parse(empleo.paginaWeb)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                context.startActivity(intent)
-            },
-            modifier = Modifier
-                .width(195.dp)
-                .padding(2.dp, 0.dp)
-        ) {
-            Text(text = "Solicitar")
+        Column(modifier = Modifier.fillMaxSize()) {
+            Text(
+                text = boletos.nombre,
+                fontWeight = FontWeight.Black,
+                textAlign = TextAlign.Left,
+                fontSize = 14.sp
+            )
+
+            Text(
+                text = "" + boletos.cantidad,
+                textAlign = TextAlign.Left,
+                fontSize = 12.sp
+            )
+            Button(onClick = {
+                viewModel.id = boletos.id
+                boletos.cantidad.dec()
+                viewModel.save(boletos)
+                Toast.makeText(
+                    context,
+                    "Se ha guardado la propuesta de empleo con exito 👍",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }) {
+                Text(text = "Reservar")
+            }
         }
     }
-}*/
+}

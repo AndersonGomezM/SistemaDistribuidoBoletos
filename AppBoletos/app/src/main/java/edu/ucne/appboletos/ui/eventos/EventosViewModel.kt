@@ -27,7 +27,7 @@ data class EventosListUiState(
 
 @HiltViewModel
 class EventosViewModel @Inject constructor(
-    private val repository: EventoRepository,
+    repository: EventoRepository,
     private val repositoryLocal: EventosRepository
 ): ViewModel() {
 
@@ -46,9 +46,8 @@ class EventosViewModel @Inject constructor(
                     _uiState.value = EventosListUiState(eventos = result.data ?: emptyList())
                 }
                 is Resources.Error -> {
-                    _uiState.value = EventosListUiState(error = result.message ?: "Error desconocido")
+                    _uiState.value = EventosListUiState(error = result.message ?: "Error")
                 }
-                else -> {}
             }
         }.launchIn(viewModelScope)
     }

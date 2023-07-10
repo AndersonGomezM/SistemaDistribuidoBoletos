@@ -1,10 +1,8 @@
 package edu.ucne.appboletos.ui.eventos
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.shapes.Shape
 import android.os.Build
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,15 +17,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,20 +30,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import androidx.navigation.NavController
 import edu.ucne.appboletos.R
 import edu.ucne.appboletos.data.remote.dto.EventoDto
 import edu.ucne.appboletos.ui.navigation.Screen
-import edu.ucne.appboletos.ui.theme.AppBoletosTheme
-import okhttp3.internal.wait
-import java.time.format.DateTimeFormatter
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EventoScreen(
     viewModel: EventosViewModel = hiltViewModel(),
+    errorNavigation: NavController,
     onClickSelected: (Int) -> Unit
 ) {
     Scaffold(
@@ -72,18 +64,22 @@ fun EventoScreen(
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
             Spacer(modifier = Modifier.height(80.dp))
-            if(uiState.isLoading)
-                CircularProgressIndicator(modifier = Modifier
-                    .size(80.dp)
-                    .padding(0.dp, 50.dp), strokeWidth = 8.dp)
+            if(uiState.error == "Error") {
+                errorNavigation.navigate(Screen.ErrorScreen.route)
+            } else {
+                if(uiState.isLoading)
+                    CircularProgressIndicator(modifier = Modifier
+                        .size(80.dp)
+                        .padding(0.dp, 50.dp), strokeWidth = 8.dp)
 
-            CategoriaList(
-                eventos = uiState.eventos,
-                viewModel = viewModel,
-                modifier = Modifier
-                    .fillMaxSize()
-            ){
-                onClickSelected(it)
+                CategoriaList(
+                    eventos = uiState.eventos,
+                    viewModel = viewModel,
+                    modifier = Modifier
+                        .fillMaxSize()
+                ){
+                    onClickSelected(it)
+                }
             }
         }
     }
@@ -99,7 +95,6 @@ private fun CategoriaList(
     LazyColumn(modifier = modifier) {
 
         items(eventos) { evento ->
-
             IconButton(
                 onClick = { onClickSelected(evento.id) },
                 modifier = Modifier
@@ -132,6 +127,7 @@ private fun SelectedCard(
                     .width(130.dp),
                 colors = CardDefaults.cardColors(Color.Cyan)
             ) {}
+
             Spacer(modifier = Modifier.padding(3.dp, 0.dp))
 
             Column(modifier = Modifier.fillMaxSize()) {

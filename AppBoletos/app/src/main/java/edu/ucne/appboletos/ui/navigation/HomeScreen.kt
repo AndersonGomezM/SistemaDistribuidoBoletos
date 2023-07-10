@@ -61,8 +61,10 @@ private fun Menu(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.EventoScreen.route
     ) {
-        composable(Screen.EventoScreen.route){
-            EventoScreen() {
+        composable(Screen.EventoScreen.route) {
+            EventoScreen(
+                errorNavigation = navController
+            ) {
                 navController.navigate(Screen.EventoSelectedScreen.route + "/$it")
             }
         }
@@ -70,7 +72,7 @@ private fun Menu(navController: NavHostController) {
         composable(
             Screen.EventoSelectedScreen.route + "/{id}",
             arguments = listOf(navArgument("id") {type = NavType.IntType })
-        ){
+        ) {
             val id = it.arguments?.getInt("id") ?: 0
             EventoSelectedScreen(
                 id = id,
@@ -78,10 +80,14 @@ private fun Menu(navController: NavHostController) {
             )
         }
 
-        composable(Screen.GuardadosListScreen.route){
+        composable(Screen.GuardadosListScreen.route) {
             GuardadosListScreen(
                 onClickSelected = { navController.navigate(Screen.EventoSelectedScreen.route) }
             )
+        }
+
+        composable(Screen.ErrorScreen.route) {
+            ErrorScreen()
         }
     }
 }

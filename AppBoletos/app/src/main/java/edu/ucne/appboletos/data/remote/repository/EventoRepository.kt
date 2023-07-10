@@ -1,6 +1,7 @@
 package edu.ucne.appboletos.data.remote.repository
 
 import edu.ucne.appboletos.data.remote.EventoApi
+import edu.ucne.appboletos.data.remote.dto.BoletosDto
 import edu.ucne.appboletos.data.remote.dto.EventoDto
 import edu.ucne.appboletos.utils.Resources
 import kotlinx.coroutines.flow.flow
@@ -14,7 +15,7 @@ class EventoRepository @Inject constructor(
     fun getListEventos(): Flow<Resources<List<EventoDto>>> = flow {
         try {
             emit(Resources.Loading())
-            emit(Resources.Success(evento.GetList()))
+            emit(Resources.Success(evento.GetListE()))
         } catch (e: IOException) {
             emit(Resources.Error(e.message ?: "verificar tu conexion a internet"))
         }
@@ -28,7 +29,16 @@ class EventoRepository @Inject constructor(
         }
     }
 
-    suspend fun putEvento(id: Int, eventodto: EventoDto) {
-        evento.putEvento(id, eventodto)
+    fun getListBoletos(): Flow<Resources<List<BoletosDto>>> = flow {
+        try {
+            emit(Resources.Loading())
+            emit(Resources.Success(evento.GetListB()))
+        } catch (e: IOException) {
+            emit(Resources.Error(e.message ?: "verificar tu conexion a internet"))
+        }
+    }
+
+    suspend fun putBoleto(id: Int, boletosDto: BoletosDto) {
+        evento.PutBoleto(id, boletosDto)
     }
 }
